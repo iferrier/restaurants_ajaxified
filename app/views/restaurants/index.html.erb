@@ -2,7 +2,10 @@
   <h1>Our restaurants</h1>
   <ul>
     <% @restaurants.each do |restaurant| %>
-      <li><%= link_to restaurant.name, restaurant_path(restaurant) %></li>
+      <li>
+        <%= link_to restaurant.name, restaurant_path(restaurant) %>
+        <%= link_to 'delete', restaurant_path(restaurant), method: :delete, remote: true %>
+      </li>
     <% end %>
   </ul>
 </div>

@@ -4,18 +4,18 @@
   <h2>
     <%= pluralize @restaurant.reviews.size, "review" %>
   </h2>
-  <div id="reviews">
-    <% if @restaurant.reviews.blank? %>
-      Be the first to leave a review for <%= @restaurant.name %>
-    <% else %>
-      <% @restaurant.reviews.each do |review| %>
-        <p><%= review.content %></p>
-      <% end %>
-    <% end %>
-  </div>
 
-  <%= simple_form_for([@restaurant, @review]) do |f| %>
-    <%= f.input :content %>
-    <%= f.button :submit, class: 'btn btn-dark' %>
-  <% end %>
+  <div data-controller="insert-in-list">
+    <div id="reviews" data-insert-in-list-target="items">
+      <% if @restaurant.reviews.blank? %>
+        Be the first to leave a review for <%= @restaurant.name %>
+      <% else %>
+        <% @restaurant.reviews.each do |review| %>
+          <%= render 'review', review: review %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%= render 'reviews/form', restaurant: @restaurant, review: @review %>
+  </div>
 </div>
